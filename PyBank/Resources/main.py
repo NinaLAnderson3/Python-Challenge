@@ -19,8 +19,8 @@ with open(budget_data, newline='',) as csvfile:
 
     for row in csvreader:
         months.append(row[0])
-        change = int(row[1])-value
-        profits.append(change)
+        net = int(row[1])-value
+        profits.append(net)
         value = int(row[1])
 
         #total_months += 1
