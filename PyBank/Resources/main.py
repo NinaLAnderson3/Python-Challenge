@@ -1,28 +1,55 @@
 import os
 import csv
 
-fhand = open('budget_data.csv')
-csv_f = csv.reader(fhand)
-fields = next(csv_f)
-months = []
-net_change = []
-profit = []
+budget_data = os.path.join('budget_data.csv')
 
-for row in csv_f:
-    months.append(row[0])
-    profit.append(int(row[1]))
+total_months = 0
+total_pl = 0
+value = 0
+dates = []
+profits = []
 
-for i in range(len(profit)-1):
-    net_change.append(profit[i+1]-profit[i])
-    average_change = sum(net_change) / len(net_change)
-    max_increase = max(net_change)
-    Max_date = str(months[net_change.index(max(net_change))])
+with open(budget_data, newline='',) as csvfile:
+    csvreader = csv.reader(csvfile, delimiter =',')
+    csv_header = next(csvreader)
+    first_row = next(csvreader)
+    total_months +=2
+    total_pl += int(first_row[1])
+    value = int(first_row[1])
 
-    max_decrease = min(net_change)
-    Min_date = str(months[net_change.index(min(net_change))])
+    for row in csvreader:
+        dates.append(row[0])
+        change = int(row[1])-value
+        profits.append(change)
+        value = int(row[1])
+
+        #total_months += 1
+        total_pl = total_pl+int(row[1])
+
+        greatest_increase = max(profits)
+        greatest_index = profits.index(greatest_increase)
+        best_date = dates[greatest_index]
+
+        max_decrease = min(profits)
+        worst_index = profits.index(max_decrease)
+        worst_date = dates[worst_index]
+
+        avg_change = sum(profits)/len(profits)
 
 
-print("Total months: ", len(months))
-print("Average Change: $", average_change)
-print("Greatest Increase: ", Max_date, max_increase)
-print("Greatest Decrease: ", Min_date, max_decrease)
+print("Total months: ", len(dates))
+print("Average Change: $", avg_change)
+print("Total is:", total_pl)
+print("Greatest Increase: ", best_date, greatest_increase)
+print("Greatest Decrease: ", worst_date, max_decrease)
+
+output = open("analysis.txt","w")
+
+line1 = "Financial Analysis"
+line2 = "----------------"
+line3 = str(f"Total Months: {str(total_months)}")
+line4 = str(f"Total: ${str(total_pl)}")
+line5 = str(f"Average Change: ${str(round(avg_change))}")
+line6 = str(f"Greatest Increase in Profits: {best_date}${str(greatest_increase)}")
+line7 = str(f"Greatest decrease in profits: {worst_date}(${str(max_decrease)})")
+output.write('{}\n{}\n{}\n{}\n{}\n{}\n{}\n'.format(line1, line2, line3, line4, line5, line6, line7))
