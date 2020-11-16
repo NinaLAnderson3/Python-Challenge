@@ -1,18 +1,8 @@
 import os
 import csv
 
-#define variables
-month_count = 0
-months = []
-total_rev = 0
-current_rev = 0
-last_rev = 0
-rev_change = 0
-changes = []
-budgetData_csv = os.path.join('budget_data.csv')
+fhand = open('budget_data.csv')
+csv_f = csv.reader(fhand)
 
-with os.path.join('budget_data.csv') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=',')
-    header = next(csvreader)
-
-    print(header)
+for row in csv_f:
+    print(row)
