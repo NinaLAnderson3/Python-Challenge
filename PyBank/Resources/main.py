@@ -14,6 +14,14 @@ for row in csv_f:
 
 for i in range(len(profit)-1):
     net_change.append(profit[i+1]-profit[i])
+    average_change = sum(net_change) / len(net_change)
+    max_increase = max(net_change)
+    Max_date = str(months[net_change.index(max(net_change))])
+
+    max_decrease = min(net_change)
+    Min_date = str(months[net_change.index(min(net_change))])
     #print(months + net_change)
+print(Max_date, max_increase)
+print(Min_date, max_decrease)
 print(fields)
 print(len(months))
