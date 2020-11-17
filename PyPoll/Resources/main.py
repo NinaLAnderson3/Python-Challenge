@@ -58,7 +58,7 @@ line3 = str(f'Total Votes: {str(total_votes)}')
 line4 = str("--------------")
 newfile.write('{}\n{}\n{}\n{}\n'.format(line1, line2, line3, line4))
 for i in range (len(candidates)):
-    line = str(f'{candidates[i]}: {str(percent_votes[i])} ({str(num_votes[i])})')
+    line = str(f'{candidates[i]}: {str(percent_votes[i])}% ({str(num_votes[i])})')
     newfile.write('{}\n'.format(line))
 line5 = "----------------"
 line6 = str(f"Winner: {winning_candidate}")
