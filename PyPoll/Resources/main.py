@@ -39,6 +39,9 @@ with open(election_data, newline="") as csvfile:
     winning_candidate = candidates[index]
     #print(winning_candidate, num_votes[0])
 
+#print(candidates)
+#print(num_votes)
+#print(percent_votes)
 
 print("Election Results")
 print("------------------")
@@ -50,7 +53,7 @@ print("-----------------")
 print(f"Winner: {winning_candidate}{winner}")
 print("--------------------")
 
-#create output
+#create output file as text document
 newfile = open("PyPoll_analysis.txt","w")
 line1 = "Election Results"
 line2 = "-----------------"
